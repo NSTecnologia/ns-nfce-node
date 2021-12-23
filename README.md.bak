@@ -31,14 +31,14 @@ Primeiramente, vamos fazer referencia da classe *emitirSincrono*, para utilizarm
 
        const nsAPI = require('ns-nfce-node/ns_modules/nfce_module/emissao/emitirSincrono')
 
-O segundo passo é importar, ou construir o arquivo de emissão em **.json** da NFCe.
+O segundo passo é importar, ou construir o arquivo de emissão em **.json** da NFe.
 
-       const nfceJSON = require('./nfce.json')
+       const nfeJSON = require('./nfce.json')
            
 Apos isso, vamo utilizar o método **sendPostRequest** da classe *EmissaoSincrona* para realizar o envio deste documento NFCe para a API.
 Este método realiza a emissão, a consulta de status de processamento e o download de forma sequencial.
 
-       var retorno = nsAPI.emitirNFCeSincrono(nfceJSON,"2","XP","Documentos/NFCe")
+       var retorno = nsAPI.emitirNFCeSincrono(nfceJSON,"2","XP","Documentos/NFe")
        retorno.then(()=>)
 
 Os parâmetros deste método são:
@@ -141,7 +141,7 @@ Os parâmetros informados no método são:
 
 ### Inutilização de numeração da NFCe
 
-Para emitirmos uma inutilização de numeração da NFCe, devemos gerar o objeto do corpo da requisição, utilizando a classe *Inutilizacao.Body*, e utilizar o método *Inutilizacao.sendPostRequest*, da seguinte forma:
+Para emitirmos uma inutilização de numeração da NFe, devemos gerar o objeto do corpo da requisição, utilizando a classe *Inutilizacao.Body*, e utilizar o método *Inutilizacao.sendPostRequest*, da seguinte forma:
 
 	const inutilizarNFCe = require('./node_modules/ns-nfce-node/ns_nodules/nfce_module/eventos/inutilizacao') 
 
@@ -170,15 +170,15 @@ Ainda com esta biblioteca, é possivel acessar método utilitários da API de NF
 
 ### Consultar situação de NFCe
         
-       const consultarNFCe = require('./node_modules/ns-nfce-node/ns_nodules/nfce_module/util/consultarSituacao')
+       const consultarNFe = require('./node_modules/ns-nfce-node/ns_nodules/nfce_module/util/consultarSituacao')
 
-		let corpo = new consultarNFCe.Body(
+		let corpo = new consultarNFe.Body(
 			"07364617000135",
 			"43211207364617000135650000000223501529141481",
 			"2"
 		)
 
-	consultarNFCe.sendPostRequest(corpo).then(getResponse => { console.log(getResponse) })
+	consultarNFe.sendPostRequest(corpo).then(getResponse => { console.log(getResponse) })
         
 
 
@@ -195,7 +195,14 @@ Ainda com esta biblioteca, é possivel acessar método utilitários da API de NF
 		)
 
 		enviarEmail.sendPostRequest(corpo).then(getResponse => { console.log(getResponse) })
-       
+        
+### Listagem de nsNRec's vinculados à uma NFe
+
+       const listarNSNRec = require('./node_modules/ns-nfe-node/ns_modules/nfe_module/util/listarNSNrec')
+       let corpo = new listarNSNRec.body("43210914139046000109550000000257891100116493")
+
+       listarNSNRec.sendPostRequest(corpo).then(() => {})
+
 ### Gerar prévia de NFCe 
 
 		const nsAPI = require('./node_modules/ns-nfce-node/ns_nodules/nfce_module/util/previa')
