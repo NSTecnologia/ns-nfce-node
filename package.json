@@ -1,6 +1,6 @@
 {
   "name": "ns-nfce-node",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Biblioteca para comunicancao com a API de NFCe da NS Tecnologia.",
   "main": "index.js",
   "scripts": {
